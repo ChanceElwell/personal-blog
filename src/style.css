@@ -1,7 +1,114 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-/* Force background parallax effect */
-.bg-fixed {
-  background-attachment: fixed;
+/* Reset + general */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background: #fafafa;
+  color: #333;
+}
+
+/* Intro screen - fullscreen */
+#intro-screen {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+
+.intro-title {
+  font-size: 3rem;
+  color: #007bff;
+  text-align: center;
+  margin: 0;
+}
+
+/* Sticky Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Upload button */
+.upload-btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.upload-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Post Feed scroll */
+#post-feed {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+}
+
+/* Each post snaps */
+.snap-section {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+/* Instagram-like post styling */
+.post-item {
+  width: 90%;
+  max-width: 600px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 1rem;
+  text-align: center;
+}
+
+.post-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.post-item p {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.4;
+}
+
+/* Optional: Scrollbar styling */
+#post-feed::-webkit-scrollbar {
+  width: 8px;
+}
+
+#post-feed::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
 }
