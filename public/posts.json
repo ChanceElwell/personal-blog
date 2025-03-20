@@ -1,0 +1,17 @@
+[
+  {
+    "type": "image",
+    "img": "https://picsum.photos/600/400?random=1",
+    "caption": "Exploring new ideas in tech."
+  },
+  {
+    "type": "image",
+    "img": "https://picsum.photos/600/400?random=2",
+    "caption": "Golden ratio is everywhere 🌿"
+  },
+  {
+    "type": "image",
+    "img": "https://picsum.photos/600/400?random=3",
+    "caption": "City life meets design."
+  }
+]

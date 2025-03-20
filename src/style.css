@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* Force background parallax effect */
+.bg-fixed {
+  background-attachment: fixed;
+}
