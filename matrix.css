@@ -1,0 +1,24 @@
+body {
+  margin: 0;
+  background: black;
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  overflow: hidden;
+}
+
+.terminal {
+  width: 100vw;
+  height: 100vh;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.line {
+  white-space: pre;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  transition: transform 0.3s ease;
+}

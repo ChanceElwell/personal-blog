@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aphorism Space</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Styling for the play circle */
+    #play-circle {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #2C3E50; /* Play circle color */
+      cursor: move;
+    }
+
+    /* Styling for the draggable green circle */
+    #play-area {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background-color: rgba(0, 255, 0, 0.3); /* Green circle */
+      border: 2px solid #2C3E50;
+      transform: translate(-50%, -50%); /* Center the circle */
+    }
+  </style>
+</head>
+<body>
+  <!-- YouTube Audio Embed (Hidden Video, Audio Only) -->
+  <div id="music-container">
+    <iframe id="yt-player" width="0" height="0" 
+            src="https://www.youtube.com/embed/LGwRna0KL8s?enablejsapi=1&autoplay=1&mute=0&controls=0" 
+            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+    </iframe>
+  </div>
+
+  <!-- Circular Play Area for Start/Stop -->
+  <div id="play-area"></div>
+
+  <!-- Play Circle (Draggable) -->
+  <div id="play-circle"></div>
+
+  <!-- YouTube Iframe API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script>
+    // Create references for the elements
+    const playCircle = document.getElementById('play-circle');
+    const playArea = document.getElementById('play-area');
+
+    let isDragging = false;
+    let offsetX, offsetY;
+    let isInsideCircle = false;
+
+    // Initialize the YouTube player
+    let player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('yt-player', {
+        events: {
+          'onReady': onPlayerReady,
+        }
+      });
+    }
+
+    // When the player is ready, set up the drag functionality
+    function onPlayerReady(event) {
+      setInterval(checkInsideCircle, 100); // Check if the play circle is inside the green area
+    }
+
+    // Make the play circle draggable
+    playCircle.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      offsetX = e.clientX - playCircle.getBoundingClientRect().left;
+      offsetY = e.clientY - playCircle.getBoundingClientRect().top;
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      if (isDragging) {
+        const x = e.clientX - offsetX;
+        const y = e.clientY - offsetY;
+
+        playCircle.style.left = `${x}px`;
+        playCircle.style.top = `${y}px`;
+
+        // Check if the play circle is inside the green target area
+        checkInsideCircle();
+      }
+    });
+
+    document.addEventListener("mouseup", () => {
+      isDragging = false;
+    });
+
+    // Function to check if the play circle is inside the green target area
+    function checkInsideCircle() {
+      const playAreaRect = playArea.getBoundingClientRect();
+      const playCircleRect = playCircle.getBoundingClientRect();
+
+      // Get center of play area and play circle
+      const playAreaCenterX = playAreaRect.left + playAreaRect.width / 2;
+      const playAreaCenterY = playAreaRect.top + playAreaRect.height / 2;
+      const playCircleCenterX = playCircleRect.left + playCircleRect.width / 2;
+      const playCircleCenterY = playCircleRect.top + playCircleRect.height / 2;
+
+      // Calculate distance between the two centers
+      const distance = Math.sqrt(
+        Math.pow(playCircleCenterX - playAreaCenterX, 2) + Math.pow(playCircleCenterY - playAreaCenterY, 2)
+      );
+
+      // Check if the button is inside the circle
+      if (distance < playAreaRect.width / 2) {
+        if (!isInsideCircle) {
+          isInsideCircle = true;
+          startPlayingMusic(); // Start music when inside
+        }
+      } else {
+        if (isInsideCircle) {
+          isInsideCircle = false;
+          stopPlayingMusic(); // Stop music when outside
+        }
+      }
+    }
+
+    // Function to start playing music
+    function startPlayingMusic() {
+      if (player && player.getPlayerState() !== YT.PlayerState.PLAYING) {
+        player.playVideo();
+      }
+    }
+
+    // Function to stop playing music
+    function stopPlayingMusic() {
+      if (player && player.getPlayerState() === YT.PlayerState.PLAYING) {
+        player.pauseVideo();
+      }
+    }
+  </script>
+</body>
+</html>
