@@ -4,47 +4,40 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chance's Personal Blog</title>
-  <link rel="stylesheet" href="/src/style.css">
+  <link rel="stylesheet" href="./src/style.css">
 </head>
 
 <body>
 
+  <!-- Fullscreen Intro Screen (No upload button here) -->
+  <section id="intro-screen" class="full-screen">
+    <h1 class="intro-title">Chance's Personal Blog</h1>
+  </section>
+
+  <!-- Sticky Header (with Upload Button) -->
+  <header class="site-header sticky">
+    <h1 class="site-title">Chance's Personal Blog</h1>
+    <a href="upload.html" class="upload-btn">➕ New Post</a>
+  </header>
+
+  <!-- Scrollable Post Feed -->
   <div id="post-feed">
-
-    <!-- Fullscreen Intro Screen -->
-    <section id="intro-screen" class="snap-section full-screen">
-      <h1 class="intro-title">Chance’s Personal Blog</h1>
-    </section>
-
-    <!-- Sticky Header that stays visible during post scrolling -->
-    <header class="site-header sticky">
-      <h1 class="site-title">Chance's Personal Blog</h1>
-      <a href="upload.html" class="upload-btn">➕ New Post</a>
-    </header>
-
-    <!-- Scrollable Post Feed -->
     <div class="sticky-wrapper">
-      <!-- Post 1 -->
       <section class="post-item snap-section">
         <img src="https://picsum.photos/800/600?random=1" alt="Post 1 Image">
         <p>Exploring new ideas in tech.</p>
       </section>
-
-      <!-- Post 2 -->
       <section class="post-item snap-section">
         <img src="https://picsum.photos/800/600?random=2" alt="Post 2 Image">
         <p>Golden ratio is everywhere.</p>
       </section>
-
-      <!-- Post 3 -->
       <section class="post-item snap-section">
         <img src="https://picsum.photos/800/600?random=3" alt="Post 3 Image">
         <p>Refactoring this blog for the third time... feels better now.</p>
       </section>
     </div>
-
   </div>
 
-  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="./src/main.js"></script>
 </body>
 </html>
